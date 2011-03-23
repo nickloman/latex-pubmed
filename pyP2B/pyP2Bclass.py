@@ -29,6 +29,16 @@ import sys
 import urllib2
 from xml.dom.minidom import parse
 
+
+def capitalise(s):
+    ns = u""
+    for c in list(s):
+        if c.isupper():
+            ns += "{" + c + "}"
+        else: 
+            ns += c
+    return ns
+
 class pyP2B:
 
     def getPubmedReference(self, pubmedUID):
@@ -155,7 +165,7 @@ class pyP2B:
             # result = result + "@article{%s,\n" % (bibtexId)
             result = result + u"@article{pmid%s,\n" % (pmid)
             result = result + u"\tauthor = {%s},\n" % (authors)
-            result = result + u"\ttitle = {%s},\n" % (title)
+            result = result + u"\ttitle = {%s},\n" % (capitalise(title))
             result = result + u"\tyear = %s,\n" % (year)
             result = result + u"\tjournal = {%s},\n" % (journal)
             result = result + u"\tvolume = {%s},\n" % (volume)
